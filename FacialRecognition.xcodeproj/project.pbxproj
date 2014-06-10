@@ -9,13 +9,23 @@
 /* Begin PBXBuildFile section */
 		CEA94B3519476F6600D490B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3419476F6600D490B8 /* main.m */; };
 		CEA94B3819476F6600D490B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3719476F6600D490B8 /* AppDelegate.m */; };
-		CEA94B3B19476F6600D490B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3A19476F6600D490B8 /* ViewController.m */; };
-		CEA94B3E19476F6600D490B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA94B3C19476F6600D490B8 /* Main.storyboard */; };
+		CEA94B3B19476F6600D490B8 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3A19476F6600D490B8 /* PhotoViewController.m */; };
 		CEA94B4019476F6600D490B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA94B3F19476F6600D490B8 /* Images.xcassets */; };
 		CEA94B4C19476F6600D490B8 /* FacialRecognitionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B4B19476F6600D490B8 /* FacialRecognitionTests.m */; };
+		CEA94B56194775E500D490B8 /* linkedin_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEA94B55194775E500D490B8 /* linkedin_image.jpg */; };
+		CEA94B58194775FF00D490B8 /* graduation.JPG in Resources */ = {isa = PBXBuildFile; fileRef = CEA94B57194775FF00D490B8 /* graduation.JPG */; };
+		CEA94B5B1947762F00D490B8 /* mikeandpops.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEA94B5A1947762F00D490B8 /* mikeandpops.jpg */; };
+		CEA94B5D1947763900D490B8 /* jennandme.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEA94B5C1947763900D490B8 /* jennandme.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CE79CA5919477C0200F3EA3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA94B2719476F6600D490B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEA94B2E19476F6600D490B8;
+			remoteInfo = FacialRecognition;
+		};
 		CEA94B4619476F6600D490B8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEA94B2719476F6600D490B8 /* Project object */;
@@ -31,13 +41,16 @@
 		CEA94B3419476F6600D490B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEA94B3619476F6600D490B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEA94B3719476F6600D490B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CEA94B3919476F6600D490B8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CEA94B3A19476F6600D490B8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		CEA94B3D19476F6600D490B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CEA94B3919476F6600D490B8 /* PhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		CEA94B3A19476F6600D490B8 /* PhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		CEA94B3F19476F6600D490B8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CEA94B4519476F6600D490B8 /* FacialRecognitionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacialRecognitionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA94B4A19476F6600D490B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA94B4B19476F6600D490B8 /* FacialRecognitionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FacialRecognitionTests.m; sourceTree = "<group>"; };
+		CEA94B55194775E500D490B8 /* linkedin_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = linkedin_image.jpg; sourceTree = "<group>"; };
+		CEA94B57194775FF00D490B8 /* graduation.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = graduation.JPG; sourceTree = "<group>"; };
+		CEA94B5A1947762F00D490B8 /* mikeandpops.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mikeandpops.jpg; sourceTree = "<group>"; };
+		CEA94B5C1947763900D490B8 /* jennandme.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jennandme.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,11 +92,11 @@
 		CEA94B3119476F6600D490B8 /* FacialRecognition */ = {
 			isa = PBXGroup;
 			children = (
+				CEA94B591947760E00D490B8 /* images */,
 				CEA94B3619476F6600D490B8 /* AppDelegate.h */,
 				CEA94B3719476F6600D490B8 /* AppDelegate.m */,
-				CEA94B3919476F6600D490B8 /* ViewController.h */,
-				CEA94B3A19476F6600D490B8 /* ViewController.m */,
-				CEA94B3C19476F6600D490B8 /* Main.storyboard */,
+				CEA94B3919476F6600D490B8 /* PhotoViewController.h */,
+				CEA94B3A19476F6600D490B8 /* PhotoViewController.m */,
 				CEA94B3F19476F6600D490B8 /* Images.xcassets */,
 				CEA94B3219476F6600D490B8 /* Supporting Files */,
 			);
@@ -114,6 +127,17 @@
 				CEA94B4A19476F6600D490B8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEA94B591947760E00D490B8 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				CEA94B5C1947763900D490B8 /* jennandme.jpg */,
+				CEA94B5A1947762F00D490B8 /* mikeandpops.jpg */,
+				CEA94B55194775E500D490B8 /* linkedin_image.jpg */,
+				CEA94B57194775FF00D490B8 /* graduation.JPG */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +172,7 @@
 			);
 			dependencies = (
 				CEA94B4719476F6600D490B8 /* PBXTargetDependency */,
+				CE79CA5A19477C0200F3EA3B /* PBXTargetDependency */,
 			);
 			name = FacialRecognitionTests;
 			productName = FacialRecognitionTests;
@@ -196,7 +221,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEA94B3E19476F6600D490B8 /* Main.storyboard in Resources */,
+				CEA94B56194775E500D490B8 /* linkedin_image.jpg in Resources */,
+				CEA94B5B1947762F00D490B8 /* mikeandpops.jpg in Resources */,
+				CEA94B58194775FF00D490B8 /* graduation.JPG in Resources */,
+				CEA94B5D1947763900D490B8 /* jennandme.jpg in Resources */,
 				CEA94B4019476F6600D490B8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,7 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEA94B3B19476F6600D490B8 /* ViewController.m in Sources */,
+				CEA94B3B19476F6600D490B8 /* PhotoViewController.m in Sources */,
 				CEA94B3819476F6600D490B8 /* AppDelegate.m in Sources */,
 				CEA94B3519476F6600D490B8 /* main.m in Sources */,
 			);
@@ -232,23 +260,17 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CE79CA5A19477C0200F3EA3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEA94B2E19476F6600D490B8 /* FacialRecognition */;
+			targetProxy = CE79CA5919477C0200F3EA3B /* PBXContainerItemProxy */;
+		};
 		CEA94B4719476F6600D490B8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CEA94B2E19476F6600D490B8 /* FacialRecognition */;
 			targetProxy = CEA94B4619476F6600D490B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		CEA94B3C19476F6600D490B8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEA94B3D19476F6600D490B8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CEA94B4D19476F6600D490B8 /* Debug */ = {
@@ -333,6 +355,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = FacialRecognition/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -344,6 +367,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = FacialRecognition/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -404,6 +428,7 @@
 				CEA94B5119476F6600D490B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CEA94B5219476F6600D490B8 /* Build configuration list for PBXNativeTarget "FacialRecognitionTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +437,7 @@
 				CEA94B5419476F6600D490B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
