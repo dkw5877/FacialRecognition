@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE79CA601947867200F3EA3B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE79CA5F1947867200F3EA3B /* CoreImage.framework */; };
 		CEA94B3519476F6600D490B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3419476F6600D490B8 /* main.m */; };
 		CEA94B3819476F6600D490B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3719476F6600D490B8 /* AppDelegate.m */; };
 		CEA94B3B19476F6600D490B8 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3A19476F6600D490B8 /* PhotoViewController.m */; };
@@ -26,6 +27,20 @@
 			remoteGlobalIDString = CEA94B2E19476F6600D490B8;
 			remoteInfo = FacialRecognition;
 		};
+		CE79CA5B19477C0200F3EA3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA94B2719476F6600D490B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEA94B2E19476F6600D490B8;
+			remoteInfo = FacialRecognition;
+		};
+		CE79CA5D19477C2200F3EA3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEA94B2719476F6600D490B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEA94B2E19476F6600D490B8;
+			remoteInfo = FacialRecognition;
+		};
 		CEA94B4619476F6600D490B8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEA94B2719476F6600D490B8 /* Project object */;
@@ -36,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE79CA5F1947867200F3EA3B /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		CEA94B2F19476F6600D490B8 /* FacialRecognition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacialRecognition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA94B3319476F6600D490B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA94B3419476F6600D490B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -58,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE79CA601947867200F3EA3B /* CoreImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +91,7 @@
 		CEA94B2619476F6600D490B8 = {
 			isa = PBXGroup;
 			children = (
+				CE79CA5F1947867200F3EA3B /* CoreImage.framework */,
 				CEA94B3119476F6600D490B8 /* FacialRecognition */,
 				CEA94B4819476F6600D490B8 /* FacialRecognitionTests */,
 				CEA94B3019476F6600D490B8 /* Products */,
@@ -173,6 +191,8 @@
 			dependencies = (
 				CEA94B4719476F6600D490B8 /* PBXTargetDependency */,
 				CE79CA5A19477C0200F3EA3B /* PBXTargetDependency */,
+				CE79CA5C19477C0200F3EA3B /* PBXTargetDependency */,
+				CE79CA5E19477C2200F3EA3B /* PBXTargetDependency */,
 			);
 			name = FacialRecognitionTests;
 			productName = FacialRecognitionTests;
@@ -264,6 +284,16 @@
 			isa = PBXTargetDependency;
 			target = CEA94B2E19476F6600D490B8 /* FacialRecognition */;
 			targetProxy = CE79CA5919477C0200F3EA3B /* PBXContainerItemProxy */;
+		};
+		CE79CA5C19477C0200F3EA3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEA94B2E19476F6600D490B8 /* FacialRecognition */;
+			targetProxy = CE79CA5B19477C0200F3EA3B /* PBXContainerItemProxy */;
+		};
+		CE79CA5E19477C2200F3EA3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEA94B2E19476F6600D490B8 /* FacialRecognition */;
+			targetProxy = CE79CA5D19477C2200F3EA3B /* PBXContainerItemProxy */;
 		};
 		CEA94B4719476F6600D490B8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
