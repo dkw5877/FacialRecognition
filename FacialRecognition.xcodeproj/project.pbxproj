@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CE79CA601947867200F3EA3B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE79CA5F1947867200F3EA3B /* CoreImage.framework */; };
+		CE9F423C194F723E00DBA42C /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F423A194F723E00DBA42C /* FilterViewController.m */; };
+		CE9F423D194F723E00DBA42C /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9F423B194F723E00DBA42C /* FilterViewController.xib */; };
+		CE9F423F194F72FA00DBA42C /* PhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9F423E194F72FA00DBA42C /* PhotoViewController.xib */; };
 		CEA94B3519476F6600D490B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3419476F6600D490B8 /* main.m */; };
 		CEA94B3819476F6600D490B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3719476F6600D490B8 /* AppDelegate.m */; };
 		CEA94B3B19476F6600D490B8 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA94B3A19476F6600D490B8 /* PhotoViewController.m */; };
@@ -52,6 +55,10 @@
 
 /* Begin PBXFileReference section */
 		CE79CA5F1947867200F3EA3B /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		CE9F4239194F723E00DBA42C /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		CE9F423A194F723E00DBA42C /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		CE9F423B194F723E00DBA42C /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		CE9F423E194F72FA00DBA42C /* PhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoViewController.xib; sourceTree = "<group>"; };
 		CEA94B2F19476F6600D490B8 /* FacialRecognition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacialRecognition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA94B3319476F6600D490B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA94B3419476F6600D490B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -115,6 +122,10 @@
 				CEA94B3719476F6600D490B8 /* AppDelegate.m */,
 				CEA94B3919476F6600D490B8 /* PhotoViewController.h */,
 				CEA94B3A19476F6600D490B8 /* PhotoViewController.m */,
+				CE9F423E194F72FA00DBA42C /* PhotoViewController.xib */,
+				CE9F4239194F723E00DBA42C /* FilterViewController.h */,
+				CE9F423A194F723E00DBA42C /* FilterViewController.m */,
+				CE9F423B194F723E00DBA42C /* FilterViewController.xib */,
 				CEA94B3F19476F6600D490B8 /* Images.xcassets */,
 				CEA94B3219476F6600D490B8 /* Supporting Files */,
 			);
@@ -243,8 +254,10 @@
 			files = (
 				CEA94B56194775E500D490B8 /* linkedin_image.jpg in Resources */,
 				CEA94B5B1947762F00D490B8 /* mikeandpops.jpg in Resources */,
+				CE9F423F194F72FA00DBA42C /* PhotoViewController.xib in Resources */,
 				CEA94B58194775FF00D490B8 /* graduation.JPG in Resources */,
 				CEA94B5D1947763900D490B8 /* jennandme.jpg in Resources */,
+				CE9F423D194F723E00DBA42C /* FilterViewController.xib in Resources */,
 				CEA94B4019476F6600D490B8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +278,7 @@
 			files = (
 				CEA94B3B19476F6600D490B8 /* PhotoViewController.m in Sources */,
 				CEA94B3819476F6600D490B8 /* AppDelegate.m in Sources */,
+				CE9F423C194F723E00DBA42C /* FilterViewController.m in Sources */,
 				CEA94B3519476F6600D490B8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

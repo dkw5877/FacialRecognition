@@ -8,15 +8,26 @@
 
 #import "PhotoViewController.h"
 #import <CoreImage/CoreImage.h>
+#import "FilterViewController.h"
 
 @interface PhotoViewController ()
             
 @property (nonatomic)NSArray* photos;
-@property (nonatomic)UIImageView *imageView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
 @implementation PhotoViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
             
 - (void)viewDidLoad
 {
@@ -26,23 +37,18 @@
     
     self.photos = @[[UIImage imageNamed:@"linkedin_image.jpg"],[UIImage imageNamed:@"jennandme.jpg"],
                      [UIImage imageNamed:@"graduation.jpg"],[UIImage imageNamed:@"mikeandpops.jpg"]];
-    
-    CGRect imageFrame = self.view.frame;
-    imageFrame.size = CGSizeMake(300, 300);
-    float xPosition = (self.view.frame.size.width - imageFrame.size.width )/2;
-    imageFrame.origin = CGPointMake(xPosition, 80.0);
-    _imageView = [[UIImageView alloc]initWithFrame:imageFrame];
-    
-    [self.view addSubview:_imageView];
 
     _imageView.image =  _photos.firstObject;
-    
+
     [self applyFilter:@"CISepiaTone" toImage:_photos.firstObject withContextOptions:nil];
-    [self findFaces:_photos.firstObject];
+    NSArray* features = [self findFaces:_photos.firstObject];
+    [self getFeaturesFromFace:features];
     
 }
 
-
+/*
+ *
+ */
 - (void)applyFilter:(NSString*)imageFilter toImage:(UIImage*)image withContextOptions:(NSDictionary*)options
 {
     //render the image on the GPU
@@ -72,6 +78,16 @@
     
 }
 
+- (IBAction)onShowFiltersButton:(UIButton *)sender
+{
+    FilterViewController* fvc = [[FilterViewController alloc]init];
+    [self presentViewController:fvc animated:YES completion:nil];
+}
+
+
+/*
+ *
+ */
 - (NSArray*)findFaces:(UIImage*)image
 {
     //convert the UIImage to NSData for creating a CIImage
@@ -100,14 +116,18 @@
     return features;
 }
 
-
+/*
+ *
+ */
 - (void)getFeaturesFromFace:(NSArray*)features
 {
     //features is an array of type CIFeature return from the detector object
     
     for (CIFaceFeature *f in features)
     {
-        //NSLog(NSStringFromRect(f.bounds));
+        CGRect rect = f.bounds;
+        
+        NSLog(@"bounds: %@", NSStringFromCGRect(rect));
         
         if (f.hasLeftEyePosition)
         {
