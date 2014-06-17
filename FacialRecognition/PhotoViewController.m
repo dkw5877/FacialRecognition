@@ -13,8 +13,8 @@
 @interface PhotoViewController ()
             
 @property (nonatomic)NSArray* photos;
-
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic)NSString* selectedFilter;
 
 @end
 
@@ -40,11 +40,20 @@
 
     _imageView.image =  _photos.firstObject;
 
-    [self applyFilter:@"CISepiaTone" toImage:_photos.firstObject withContextOptions:nil];
     NSArray* features = [self findFaces:_photos.firstObject];
     [self getFeaturesFromFace:features];
     
 }
+
+/*
+ * delegate method to get filter selected by user
+ */
+- (void)selectedFilter:(NSString*)filter
+{
+    self.selectedFilter = filter;
+    [self applyFilter:self.selectedFilter toImage:_photos.firstObject withContextOptions:nil];
+}
+
 
 /*
  *
@@ -78,9 +87,13 @@
     
 }
 
+/*
+ *
+ */
 - (IBAction)onShowFiltersButton:(UIButton *)sender
 {
     FilterViewController* fvc = [[FilterViewController alloc]init];
+    fvc.delegate = (id)self;
     [self presentViewController:fvc animated:YES completion:nil];
 }
 

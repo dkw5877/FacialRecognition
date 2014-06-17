@@ -19,7 +19,7 @@
 
 @optional
 
-- (void)applyFilter:(NSString*)imageFilter toImage:(UIImage*)image withContextOptions:(NSDictionary*)options;
+- (void)selectedFilter:(NSString*)filter;
 
 @end
 
