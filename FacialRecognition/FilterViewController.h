@@ -19,7 +19,7 @@
 
 @optional
 
-- (void)selectedFilter:(NSString*)filter;
+- (void)selectedFilter:(NSDictionary*)filter;
 
 @end
 

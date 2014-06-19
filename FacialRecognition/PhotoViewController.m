@@ -14,7 +14,7 @@
             
 @property (nonatomic)NSArray* photos;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (nonatomic)NSString* selectedFilter;
+@property (nonatomic)NSDictionary* selectedFilters;
 
 @end
 
@@ -48,17 +48,17 @@
 /*
  * delegate method to get filter selected by user
  */
-- (void)selectedFilter:(NSString*)filter
+- (void)selectedFilter:(NSDictionary*)filters
 {
-    self.selectedFilter = filter;
-    [self applyFilter:self.selectedFilter toImage:_photos.firstObject withContextOptions:nil];
+    self.selectedFilters = filters;
+    [self applyFilter:self.selectedFilters toImage:_photos.firstObject withContextOptions:nil];
 }
 
 
 /*
  *
  */
-- (void)applyFilter:(NSString*)imageFilter toImage:(UIImage*)image withContextOptions:(NSDictionary*)options
+- (void)applyFilter:(NSDictionary*)imageFilters toImage:(UIImage*)image withContextOptions:(NSDictionary*)options
 {
     //render the image on the GPU
     options = @{@"kCIContextUseSoftwareRenderer":@"YES"};
@@ -71,12 +71,25 @@
     CIImage* aImage = [CIImage imageWithData:data];
     
     //create the image filter and set values
-    CIFilter* filter = [CIFilter filterWithName:imageFilter];
-    [filter setValue:aImage forKey:kCIInputImageKey];
+    CIFilter* filter = nil;
     
-    //get the resulting image of the applied filter
-    CIImage* result = [filter valueForKey:kCIOutputImageKey];
+    CIImage* result = aImage;
+
+    NSArray* filters = [_selectedFilters allValues];
     
+    for (NSString* afilter in filters)
+    {
+        //create the filter
+        filter = [CIFilter filterWithName:afilter];
+        
+        //apply the filter (using only default values)
+        [filter setValue:result forKey:kCIInputImageKey];
+        
+        //get the resulting image of the applied filter
+        result = [filter valueForKey:kCIOutputImageKey];
+    }
+    
+
     //get the extent
     CGRect extent = [result extent];
     
@@ -86,6 +99,7 @@
     _imageView.image = [UIImage imageWithCGImage:imageRef];
     
 }
+
 
 /*
  *

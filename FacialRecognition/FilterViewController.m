@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSDictionary* availableFilters;
+@property (nonatomic) NSMutableDictionary* selectedFilters;
 
 @end
 
@@ -32,7 +33,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self loadAvailableFitlers];
-    
+    _selectedFilters = [NSMutableDictionary new];
 }
 
 - (void)loadAvailableFitlers
@@ -43,7 +44,7 @@
     self.availableFilters = @{@"kCICategoryDistortionEffect":[CIFilter filterNamesInCategory:kCICategoryDistortionEffect],
                               @"kCICategoryColorEffect":[CIFilter filterNamesInCategory:kCICategoryColorEffect],
                               @"kCICategoryStylize":[CIFilter filterNamesInCategory:kCICategoryStylize],
-                              @"kCICategoryBuiltIn":[CIFilter filterNamesInCategory:kCICategoryBuiltIn]};
+                              @"kCICategoryGeometryAdjustment":[CIFilter filterNamesInCategory:kCICategoryGeometryAdjustment]};
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -82,13 +83,33 @@
     return cell;
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSNumber *sectionKey = [self.availableFilters allKeys][indexPath.section];
-    [self.delegate selectedFilter:self.availableFilters[sectionKey][indexPath.row]];
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    NSString* filter = self.availableFilters[sectionKey][indexPath.row];
+    
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if (cell.accessoryType == UITableViewCellAccessoryNone)
+    {
+        [self.selectedFilters setValue:filter forKey:filter];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        [self.selectedFilters removeObjectForKey:filter];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+}
+
+
+- (IBAction)onDoneButtonPressed:(UIBarButtonItem *)sender
+{
+        [self.delegate selectedFilter:_selectedFilters];
+        [self dismissViewControllerAnimated:YES completion:^{
+    
+        }];
 }
 
 
