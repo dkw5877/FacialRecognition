@@ -9,13 +9,15 @@
 #import "PhotoViewController.h"
 #import <CoreImage/CoreImage.h>
 #import "FilterViewController.h"
+#import "PhotoViewCell.h"
 
-@interface PhotoViewController ()
+@interface PhotoViewController ()< UICollectionViewDelegate, UICollectionViewDataSource >
             
 @property (nonatomic)NSArray* photos;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic)NSDictionary* selectedFilters;
 
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end
 
 @implementation PhotoViewController
@@ -23,27 +25,78 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
-            
+
+
 - (void)viewDidLoad
 {
-    
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
+    
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
     
     self.photos = @[[UIImage imageNamed:@"linkedin_image.jpg"],[UIImage imageNamed:@"jennandme.jpg"],
                      [UIImage imageNamed:@"graduation.jpg"],[UIImage imageNamed:@"mikeandpops.jpg"]];
 
-    _imageView.image =  _photos.firstObject;
-
-    NSArray* features = [self findFaces:_photos.firstObject];
-    [self getFeaturesFromFace:features];
+    self.imageView.image =  self.photos.firstObject;
+    [self findFaces:self.imageView.image];
     
 }
+
+#pragma mark - UICollectionViewDelegate Methods
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.photos.count;
+}
+
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString* cellIdentifier = @"photoCellId";
+    
+    //load the nib file and register the cell with the collection view
+    UINib *cellNib = [UINib nibWithNibName:@"PhotoCollectionViewCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
+    
+    PhotoViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    if (!cell)
+    {
+        cell = [[PhotoViewCell alloc]init];
+    }
+    
+    cell.backgroundColor = [UIColor redColor];
+    cell.imageView.image = self.photos[indexPath.row];
+    return cell;
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.imageView.image = self.photos[indexPath.row];
+    [self findFaces:self.imageView.image];
+}
+
+
+#pragma mark - IBAction Methods
+
+/*
+ *
+ */
+- (IBAction)onShowFiltersPressed:(UIBarButtonItem *)sender
+{
+    FilterViewController* fvc = [[FilterViewController alloc]init];
+    fvc.delegate = (id)self;
+    [self presentViewController:fvc animated:YES completion:nil];
+}
+
+#pragma mark - FilterRelated Methods
 
 /*
  * delegate method to get filter selected by user
@@ -51,7 +104,7 @@
 - (void)selectedFilter:(NSDictionary*)filters
 {
     self.selectedFilters = filters;
-    [self applyFilter:self.selectedFilters toImage:_photos.firstObject withContextOptions:nil];
+    [self applyFilter:self.selectedFilters toImage:self.imageView.image withContextOptions:nil];
 }
 
 
@@ -75,7 +128,7 @@
     
     CIImage* result = aImage;
 
-    NSArray* filters = [_selectedFilters allValues];
+    NSArray* filters = [self.selectedFilters allValues];
     
     for (NSString* afilter in filters)
     {
@@ -89,39 +142,28 @@
         result = [filter valueForKey:kCIOutputImageKey];
     }
     
-
     //get the extent
     CGRect extent = [result extent];
     
     //render the image to a Core Graphics image that is ready for display or saving to a file
     CGImageRef imageRef = [context createCGImage:result fromRect:extent];
     
-    _imageView.image = [UIImage imageWithCGImage:imageRef];
+    self.imageView.image = [UIImage imageWithCGImage:imageRef];
     
 }
 
 
-/*
- *
- */
-- (IBAction)onShowFiltersButton:(UIButton *)sender
-{
-    FilterViewController* fvc = [[FilterViewController alloc]init];
-    fvc.delegate = (id)self;
-    [self presentViewController:fvc animated:YES completion:nil];
-}
-
 
 /*
  *
  */
-- (NSArray*)findFaces:(UIImage*)image
+- (void)findFaces:(UIImage*)image
 {
     //convert the UIImage to NSData for creating a CIImage
     //Note: the face detector will only work in CIImage types
     NSData* data = UIImageJPEGRepresentation(image, 1.0);
-    CIImage* aImage = [CIImage imageWithData:data];
     
+    CIImage* aImage = [CIImage imageWithData:data];
     
     //create the context for image processing
     CIContext *context = [CIContext contextWithOptions:nil];
@@ -139,38 +181,61 @@
                   [[aImage properties] valueForKey:@"Orientation"] };
     
     //Use the detector to find the features (i.e. faces in the image). There will be an entry for each face.
-    NSArray *features = [detector featuresInImage:aImage options:opts];
-    return features;
-}
-
-/*
- *
- */
-- (void)getFeaturesFromFace:(NSArray*)features
-{
-    //features is an array of type CIFeature return from the detector object
+    NSArray *foundFaces = [detector featuresInImage:aImage options:opts];
     
-    for (CIFaceFeature *f in features)
+    for (CIFaceFeature *feature in foundFaces)
     {
-        CGRect rect = f.bounds;
+        //the face origin an size within the image
+        CGRect rect = feature.bounds;
+        
+        CIImage* overlay = [CIImage imageWithColor:[CIColor colorWithRed:34/255.0 green:254/255.0 blue:6/255.0]];
+        
+        overlay = [overlay imageByCroppingToRect:rect];
+        
+        [self addRectangleFromCGRect:feature.bounds toView:self.imageView withColor:[UIColor yellowColor]];
         
         NSLog(@"bounds: %@", NSStringFromCGRect(rect));
         
-        if (f.hasLeftEyePosition)
+        if (feature.hasLeftEyePosition)
         {
-            NSLog(@"Left eye %g %g", f.leftEyePosition.x, f.leftEyePosition.y);
+            //NSLog(@"Left eye %g %g", feature.leftEyePosition.x, feature.leftEyePosition.y);
         }
         
-        if (f.hasRightEyePosition)
+        if (feature.hasRightEyePosition)
         {
-            NSLog(@"Right eye %g %g", f.rightEyePosition.x, f.rightEyePosition.y);
+            //NSLog(@"Right eye %g %g", feature.rightEyePosition.x, feature.rightEyePosition.y);
         }
         
-        if (f.hasMouthPosition)
+        if (feature.hasMouthPosition)
         {
-            NSLog(@"Mouth %g %g", f.mouthPosition.x, f.mouthPosition.y);
+            //NSLog(@"Mouth %g %g", feature.mouthPosition.x, feature.mouthPosition.y);
         }
     }
+
+}
+
+
+#pragma mark - Helper Methods
+
+/**
+ *  Adds a rectangle-view to the passed view
+ *  @param rect  the dimensions and position of the new rectangle
+ *  @param view  the parent-view
+ *  @param color the color of the rectangle (will have an alpha-value of 0.3)
+ */
+- (void) addRectangleFromCGRect:(CGRect)rect toView:(UIView *) view withColor:(UIColor *) color
+{
+    //create a scale transform,
+    CGAffineTransform transform = CGAffineTransformMakeScale(1, -0.5);
+    
+    //create a translation based on transform (scale in this case) with no movement on x (x = 0) and a movement of the y value by the height of the image view
+    CGAffineTransform transformToUIKit = CGAffineTransformTranslate(transform, 0, -self.imageView.image.size.height);
+    CGRect translatedRect = CGRectApplyAffineTransform(rect, transformToUIKit);
+    UIView * newView = [[UIView alloc] initWithFrame:translatedRect];
+    newView.layer.cornerRadius = 10;
+    newView.alpha = 0.3;
+    newView.backgroundColor = color;
+    [view addSubview:newView];
 }
 
 @end

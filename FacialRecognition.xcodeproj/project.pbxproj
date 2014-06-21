@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE21A6021955218000132B3E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE21A6011955218000132B3E /* PhotoCollectionViewCell.xib */; };
+		CE21A605195523C600132B3E /* PhotoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE21A604195523C600132B3E /* PhotoViewCell.m */; };
 		CE79CA601947867200F3EA3B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE79CA5F1947867200F3EA3B /* CoreImage.framework */; };
 		CE9F423C194F723E00DBA42C /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F423A194F723E00DBA42C /* FilterViewController.m */; };
 		CE9F423D194F723E00DBA42C /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9F423B194F723E00DBA42C /* FilterViewController.xib */; };
@@ -54,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE21A6011955218000132B3E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		CE21A603195523C600132B3E /* PhotoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewCell.h; sourceTree = "<group>"; };
+		CE21A604195523C600132B3E /* PhotoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewCell.m; sourceTree = "<group>"; };
 		CE79CA5F1947867200F3EA3B /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		CE9F4239194F723E00DBA42C /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		CE9F423A194F723E00DBA42C /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
@@ -126,6 +131,9 @@
 				CE9F4239194F723E00DBA42C /* FilterViewController.h */,
 				CE9F423A194F723E00DBA42C /* FilterViewController.m */,
 				CE9F423B194F723E00DBA42C /* FilterViewController.xib */,
+				CE21A6011955218000132B3E /* PhotoCollectionViewCell.xib */,
+				CE21A603195523C600132B3E /* PhotoViewCell.h */,
+				CE21A604195523C600132B3E /* PhotoViewCell.m */,
 				CEA94B3F19476F6600D490B8 /* Images.xcassets */,
 				CEA94B3219476F6600D490B8 /* Supporting Files */,
 			);
@@ -257,6 +265,7 @@
 				CE9F423F194F72FA00DBA42C /* PhotoViewController.xib in Resources */,
 				CEA94B58194775FF00D490B8 /* graduation.JPG in Resources */,
 				CEA94B5D1947763900D490B8 /* jennandme.jpg in Resources */,
+				CE21A6021955218000132B3E /* PhotoCollectionViewCell.xib in Resources */,
 				CE9F423D194F723E00DBA42C /* FilterViewController.xib in Resources */,
 				CEA94B4019476F6600D490B8 /* Images.xcassets in Resources */,
 			);
@@ -276,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE21A605195523C600132B3E /* PhotoViewCell.m in Sources */,
 				CEA94B3B19476F6600D490B8 /* PhotoViewController.m in Sources */,
 				CEA94B3819476F6600D490B8 /* AppDelegate.m in Sources */,
 				CE9F423C194F723E00DBA42C /* FilterViewController.m in Sources */,

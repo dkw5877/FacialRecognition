@@ -20,13 +20,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    
+
     // Override point for customization after application launch.
     PhotoViewController *vc =[[PhotoViewController alloc]init];
-     UINavigationController* nvc = [[UINavigationController alloc]initWithRootViewController:vc];
-   self.window.rootViewController = nvc;
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = vc;
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     
     return YES;
