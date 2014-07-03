@@ -40,13 +40,74 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    self.photos = @[[UIImage imageNamed:@"linkedin_image.jpg"],[UIImage imageNamed:@"jennandme.jpg"],
-                     [UIImage imageNamed:@"graduation.jpg"],[UIImage imageNamed:@"mikeandpops.jpg"]];
-
-    self.imageView.image =  self.photos.firstObject;
-    [self findFaces:self.imageView.image];
-    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        //Background Thread
+        [self loadPhotos];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            
+            //Run UI Updates
+            [self.collectionView reloadData];
+            self.imageView.image =  self.photos.firstObject;
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                //Run UI Updates
+                [self findFaces:self.imageView.image];
+            });
+        });
+        
+    });
 }
+
+/*
+ *
+ */
+-(void)loadPhotos
+{
+    NSArray* images =  @[[UIImage imageNamed:@"linkedin_image.jpg"],[UIImage imageNamed:@"jennandme.jpg"],
+                       [UIImage imageNamed:@"graduation.jpg"],[UIImage imageNamed:@"mikeandpops.jpg"]];
+    
+    NSMutableArray* resizedImages = [NSMutableArray new];
+    
+    for (UIImage* image in images)
+    {
+        [resizedImages addObject:[self resizeImage:image withWidth:150.0 andHeight:150.0]];
+    }
+    
+    self.photos = [NSArray arrayWithArray:resizedImages];
+}
+
+/**
+ *Resize an image taken with the camera for uploading to Parse.com
+ *@param float New width for the resized image
+ *@param float New height for the resized image
+ *@return UIImage Resized image
+ */
+-(UIImage *)resizeImage:(UIImage *)image withWidth:(float)width andHeight:(float)height
+{
+    UIImage *resizedImage = nil;
+    
+    //get the new size for the image
+    CGSize newSize = CGSizeMake(width, height);
+    
+    //create a rectangle based on the new size
+    CGRect rectangle = CGRectMake(0, 0, newSize.width, newSize.height);
+    
+    //create a bitmap content for the resized image
+    UIGraphicsBeginImageContext(newSize);
+    
+    //redraw the image in the new rectangle
+    [image drawInRect:rectangle];
+    
+    //assign the new image to resize image variable
+    resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    //end the image context
+    UIGraphicsEndImageContext();
+    
+    return resizedImage;
+}
+
 
 #pragma mark - UICollectionViewDelegate Methods
 
@@ -79,10 +140,18 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self removeSubviewsFromImageView];
     self.imageView.image = self.photos[indexPath.row];
     [self findFaces:self.imageView.image];
 }
 
+- (void)removeSubviewsFromImageView
+{
+    for (UIView* view in self.imageView.subviews)
+    {
+        [view removeFromSuperview];
+    }
+}
 
 #pragma mark - IBAction Methods
 
@@ -104,7 +173,10 @@
 - (void)selectedFilter:(NSDictionary*)filters
 {
     self.selectedFilters = filters;
-    [self applyFilter:self.selectedFilters toImage:self.imageView.image withContextOptions:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+         [self applyFilter:self.selectedFilters toImage:self.imageView.image withContextOptions:nil];
+    });
 }
 
 
@@ -149,7 +221,6 @@
     CGImageRef imageRef = [context createCGImage:result fromRect:extent];
     
     self.imageView.image = [UIImage imageWithCGImage:imageRef];
-    
 }
 
 
@@ -164,6 +235,9 @@
     NSData* data = UIImageJPEGRepresentation(image, 1.0);
     
     CIImage* aImage = [CIImage imageWithData:data];
+    
+    CGRect extent = [aImage extent];
+    NSLog(@"extent %f %f",extent.size.width, extent.size.height);
     
     //create the context for image processing
     CIContext *context = [CIContext contextWithOptions:nil];
@@ -188,13 +262,9 @@
         //the face origin an size within the image
         CGRect rect = feature.bounds;
         
-        CIImage* overlay = [CIImage imageWithColor:[CIColor colorWithRed:34/255.0 green:254/255.0 blue:6/255.0]];
+        [self addRectangleFromCGRect:feature.bounds scale:extent toView:self.imageView withColor:[UIColor yellowColor]];
         
-        overlay = [overlay imageByCroppingToRect:rect];
-        
-        [self addRectangleFromCGRect:feature.bounds toView:self.imageView withColor:[UIColor yellowColor]];
-        
-        NSLog(@"bounds: %@", NSStringFromCGRect(rect));
+        NSLog(@"face bounds: %@", NSStringFromCGRect(rect));
         
         if (feature.hasLeftEyePosition)
         {
@@ -223,15 +293,18 @@
  *  @param view  the parent-view
  *  @param color the color of the rectangle (will have an alpha-value of 0.3)
  */
-- (void) addRectangleFromCGRect:(CGRect)rect toView:(UIView *) view withColor:(UIColor *) color
+- (void)addRectangleFromCGRect:(CGRect)rect scale:(CGRect)scale toView:(UIView *)view withColor:(UIColor *) color
 {
     //create a scale transform,
-    CGAffineTransform transform = CGAffineTransformMakeScale(1, -0.5);
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.0, 1.0);
     
     //create a translation based on transform (scale in this case) with no movement on x (x = 0) and a movement of the y value by the height of the image view
-    CGAffineTransform transformToUIKit = CGAffineTransformTranslate(transform, 0, -self.imageView.image.size.height);
+    CGAffineTransform transformToUIKit = CGAffineTransformTranslate(transform, 1, 1);
+    
     CGRect translatedRect = CGRectApplyAffineTransform(rect, transformToUIKit);
+    
     UIView * newView = [[UIView alloc] initWithFrame:translatedRect];
+    NSLog(@"view frame %f %f", newView.frame.origin.x, newView.frame.origin.y);
     newView.layer.cornerRadius = 10;
     newView.alpha = 0.3;
     newView.backgroundColor = color;
