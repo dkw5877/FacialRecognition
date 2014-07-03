@@ -295,7 +295,7 @@
  */
 - (void)addRectangleFromCGRect:(CGRect)rect scale:(CGRect)scale toView:(UIView *)view withColor:(UIColor *) color
 {
-    //create a scale transform,
+    //create a scale transform to translate from the CIImage coordinates to the UIKit coordinates
     CGAffineTransform transform = CGAffineTransformMakeScale(1.0, -1.0);
     
     //create a translation based on transform (scale in this case) with no movement on x (x = 0) and a movement of the y value by the height of the image view
