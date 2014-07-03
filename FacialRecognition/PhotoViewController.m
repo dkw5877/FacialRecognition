@@ -296,10 +296,10 @@
 - (void)addRectangleFromCGRect:(CGRect)rect scale:(CGRect)scale toView:(UIView *)view withColor:(UIColor *) color
 {
     //create a scale transform,
-    CGAffineTransform transform = CGAffineTransformMakeScale(1.0, 1.0);
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.0, -1.0);
     
     //create a translation based on transform (scale in this case) with no movement on x (x = 0) and a movement of the y value by the height of the image view
-    CGAffineTransform transformToUIKit = CGAffineTransformTranslate(transform, 1, 1);
+    CGAffineTransform transformToUIKit = CGAffineTransformTranslate(transform, 0, -self.imageView.image.size.height);
     
     CGRect translatedRect = CGRectApplyAffineTransform(rect, transformToUIKit);
     
